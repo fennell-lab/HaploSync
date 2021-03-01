@@ -10,6 +10,8 @@ from collections import defaultdict
 import gc
 import os
 import pipes
+# Add support to the script from a centralised location (aka HPC system).
+sys.path.append(os.environ.get('HAPLOSYNC', './'))
 from HaploFunct import *
 
 gc.garbage.append(sys.stdout)
