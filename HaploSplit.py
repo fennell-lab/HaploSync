@@ -310,7 +310,7 @@ if options.map :
 	qf_file.close()
 
 	print >> sys.stdout, "-- Mapping forward query sequences"
-	map_for_file = open("tmp." + options.hits + ".for" , "w")
+	map_for_file = open("tmp." + options.hits + ".for" , "w+")
 	mappingCommand = options.mapping + " --for-only " + options.reference + " " + query_for + " | awk \'$5==\"+\"\'"
 	print >> sys.stdout, "--- Command line: " + mappingCommand + " > tmp." + options.hits + ".for"
 	mapProcess = subprocess.Popen(mappingCommand, shell=True, stdout=map_for_file)
@@ -329,13 +329,13 @@ if options.map :
 	qr_file.close()
 
 	print >> sys.stdout, "-- Mapping reverse query sequences"
-	map_rev_file = open("tmp." + options.hits + ".rev" , "w")
+	map_rev_file = open("tmp." + options.hits + ".rev" , "w+")
 	mappingCommand = options.mapping + " --for-only " + options.reference + " " + query_rev + " | awk \'$5==\"+\"\'"
 	print >> sys.stdout, "--- Command line: " + mappingCommand + " > tmp." + options.hits + ".rev"
 	mapProcess = subprocess.Popen(mappingCommand, shell=True, stdout=map_rev_file)
 	output, error = mapProcess.communicate()
 
-	map_multi_file = open("tmp." + options.hits + ".multimapping" , "w")
+	map_multi_file = open("tmp." + options.hits + ".multimapping" , "w+")
 	print >> sys.stdout, "-- Merge forward and reverse alignments"
 	mapProcess = subprocess.Popen("cat tmp." + options.hits + ".for tmp." + options.hits + ".rev", shell=True, stdout=map_multi_file)
 	output, error = mapProcess.communicate()
